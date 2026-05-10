@@ -74,6 +74,8 @@
 
 - What happens when [boundary condition]?
 - How does system handle [error scenario]?
+- What keyboard-only and screen-reader paths are required for this journey?
+- What happens when data is loading, empty, invalid, stale, or unavailable?
 
 ## Requirements *(mandatory)*
 
@@ -95,6 +97,23 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+### Accessibility Requirements *(mandatory for user-facing changes)*
+
+- **AX-001**: Changed user journeys MUST meet WCAG AA contrast, focus visibility,
+  keyboard operation, semantic structure, and accessible-name requirements.
+- **AX-002**: Automated AXE validation MUST pass for the changed route or component
+  state before the story is accepted.
+
+### Architecture Requirements *(mandatory)*
+
+- **AR-001**: Feature behavior MUST identify the affected Clean Architecture layer:
+  domain, application, infrastructure, or presentation.
+- **AR-002**: Domain and application rules MUST be testable without real browser,
+  network, storage, or Angular TestBed dependencies unless framework integration is
+  the behavior under test.
+- **AR-003**: Feature routing MUST be lazy loaded when a route boundary is added or
+  changed.
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]
@@ -113,6 +132,7 @@
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
 - **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- **SC-005**: [Quality metric, e.g., "All tests for the changed user stories pass and AXE reports no violations"]
 
 ## Assumptions
 

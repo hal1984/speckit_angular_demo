@@ -17,21 +17,33 @@
   the iteration process.
 -->
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
+**Language/Version**: TypeScript 5.9, Angular 21 or NEEDS CLARIFICATION  
+**Primary Dependencies**: Angular, RxJS, Tailwind CSS, Vitest or NEEDS CLARIFICATION  
 **Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
+**Testing**: Vitest via Angular CLI (`npm test`), route/user-journey checks, AXE or NEEDS CLARIFICATION  
+**Target Platform**: Browser SPA or NEEDS CLARIFICATION
+**Project Type**: Angular single-page application  
+**Performance Goals**: Lazy-loaded route bundles and responsive user journeys or NEEDS CLARIFICATION  
+**Constraints**: Clean Architecture boundaries, TDD, WCAG AA/AXE, strict TypeScript, Angular 21 native patterns  
 **Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- **Clean Architecture**: Plan identifies affected feature boundary under
+  `src/app/features/[feature]/` and preserves dependency direction:
+  presentation -> application -> domain, with infrastructure implementing ports.
+- **Angular 21 Native Patterns**: Plan uses standalone Angular defaults, signals,
+  `input()`/`output()`, `computed()`, `inject()`, native control flow, OnPush
+  components, lazy routes, and no NgModules or explicit `standalone: true`.
+- **TDD**: Plan defines failing tests to write before implementation for each user
+  story, including domain/use-case unit tests and at least one independently
+  executable acceptance or integration test per story.
+- **Accessibility**: Plan lists WCAG AA and AXE validation for every changed
+  user-facing journey, including keyboard, focus, names, semantics, and contrast.
+- **Simplicity and Performance**: Plan justifies any new abstraction, shared state,
+  eager-loaded route, or cross-feature dependency with a measurable need.
 
 ## Project Structure
 
@@ -56,39 +68,21 @@ specs/[###-feature]/
 -->
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+src/app/
+├── app.config.ts
+├── app.routes.ts
+├── core/
+├── features/[feature]/
+│   ├── application/
+│   ├── domain/
+│   ├── infrastructure/
+│   └── presentation/
+└── shared/
 
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+src/app/features/[feature]/
+├── domain/[name].spec.ts
+├── application/[use-case].spec.ts
+└── presentation/[component].spec.ts
 ```
 
 **Structure Decision**: [Document the selected structure and reference the real

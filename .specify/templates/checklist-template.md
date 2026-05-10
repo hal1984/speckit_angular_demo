@@ -15,6 +15,7 @@
   - Feature requirements from spec.md
   - Technical context from plan.md
   - Implementation details from tasks.md
+  - Constitution requirements for Clean Architecture, Angular 21, TDD, and accessibility
   
   DO NOT keep these sample items in the generated checklist file.
   ============================================================================
@@ -38,3 +39,5 @@
 - Add comments or findings inline
 - Link to relevant resources or documentation
 - Items are numbered sequentially for easy reference
+- Include Clean Architecture, TDD red/green/refactor, Angular 21 native patterns,
+  and WCAG AA/AXE checks whenever the feature touches production code or UI
